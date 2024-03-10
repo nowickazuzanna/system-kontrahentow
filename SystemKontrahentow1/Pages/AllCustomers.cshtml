@@ -1,0 +1,61 @@
+﻿@page
+@using SystemKontrahentow1.Data
+@using SystemKontrahentow1.Models
+@using SystemKontrahentow1.Controller
+@using Microsoft.EntityFrameworkCore
+@inject SystemKontrahentow1.Data.SystemKontrahentow1Context dbContext
+
+
+
+@model SystemKontrahentow1.Pages.Customers.IndexModel
+
+
+@{
+    ViewData["Title"] = "Customers";
+
+}
+
+<h3>Lista kontrahentów</h3>
+
+<form method="post">
+    <br />
+    <label>Imie</label>
+    <input type="text" name="Name"/>
+    <label>Adres</label>
+    <input type="text" name="Address"/>
+    <label>NIP</label>
+    <input type="text" name="NIP"/>
+    <input type="submit" value="Dodaj" class="btn btn-primary" />
+</form>
+<table class="table">
+    <thead><br />
+        <tr>
+            <th>Imie</th>
+            <th>Adres</th>
+            <th>NIP</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model.Customer)
+        {
+                <tr>
+                    <td>
+                    @customer.Name
+                    </td>
+                    <td>
+                    @customer.Address
+                    </td>
+                    <td>
+                    @customer.NIP
+                    </td>
+                    <td>
+                         <a asp-page="./Edit" asp-route-id="@customer.Id">Edytuj</a> |
+                         <a asp-page="./Details" asp-route-id="@customer.Id">Więcej</a> |
+                         <a asp-page="./Delete" asp-route-id="@customer.Id">Usuń</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
+

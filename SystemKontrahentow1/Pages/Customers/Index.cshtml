@@ -1,0 +1,40 @@
+﻿@page
+@model SystemKontrahentow1.Pages.Customers.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Lista kontrahentów</h2>
+<p><button type="button" class="btn btn-primary" onclick="location.href='@Url.Page("Create")'">Dodaj</button></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Imie</th>
+            <th>Adres</th>
+            <th>NIP</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var customer in Model.Customer) {
+        <tr>
+            <td>
+                @customer.Name
+            </td>
+            <td>
+                @customer.Address
+            </td>
+            <td>
+                @customer.NIP
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@customer.Id">Edytuj</a> |
+                <a asp-page="./Details" asp-route-id="@customer.Id">Więcej</a> |
+                <a asp-page="./Delete" asp-route-id="@customer.Id">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
